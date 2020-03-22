@@ -7,7 +7,14 @@ const fs = require('fs')
 
 const app = express()
 
-app.get('/infections', (req, res, next) => {
+const port = process.env.PORT || 8080
+app.use(express.static(__dirname + '/public'))
+
+app.get('/', (req, res) => {
+  res.sendFile('public/index.html', { root: __dirname })
+})
+
+app.get('/infections', (req, res) => {
   fetch(
     'https://thl.fi/fi/web/infektiotaudit-ja-rokotukset/ajankohtaista/ajankohtaista-koronaviruksesta-covid-19/tilannekatsaus-koronaviruksesta'
   ).then(response => {
@@ -21,7 +28,7 @@ app.get('/infections', (req, res, next) => {
   })
 })
 
-app.get('/infections/report', (req, res, next) => {
+app.get('/infections/report', (req, res) => {
   fetch(
     'https://thl.fi/fi/web/infektiotaudit-ja-rokotukset/ajankohtaista/ajankohtaista-koronaviruksesta-covid-19/tilannekatsaus-koronaviruksesta'
   )
@@ -52,6 +59,10 @@ app.get('/infections/report', (req, res, next) => {
     .catch(() => console.log('Unable to retrieve data from thl.fi'))
 })
 
-app.listen(3000, () => {
-  console.log('Server running on port 3000')
+app.get('*', (req, res) => {
+  res.redirect('/')
+})
+
+app.listen(port, () => {
+  console.log('Server running on port ' + port)
 })
