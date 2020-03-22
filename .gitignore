@@ -1,0 +1,5 @@
+# Exclude npm packages
+node_modules
+
+# Exclude build
+build
