@@ -18,13 +18,17 @@ app.get('/infections', (req, res) => {
   fetch(
     'https://thl.fi/fi/web/infektiotaudit-ja-rokotukset/ajankohtaista/ajankohtaista-koronaviruksesta-covid-19/tilannekatsaus-koronaviruksesta'
   ).then(response => {
-    response.text().then(body => {
-      res.json({
-        infected: $('b', body)
-          .text()
-          .split(' ')[2]
+    const regex = /yhteensä\s(\d*)\slaboratoriovarmistettua/i
+    response
+      .text()
+      .then(body => {
+        res.json({
+          infected: $('[data-analytics-asset-id="5700416"]', body)
+            .text()
+            .match(regex)[1]
+        })
       })
-    })
+      .catch(e => console.log('Unable to retrieve infected amount', e))
   })
 })
 
