@@ -1,5 +1,5 @@
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet" />
-<title>COVID-19 API</title>
+<title>COVID-19 Infections in Finland</title>
 <style>
   /*
     font weights: 400, 700
@@ -11,30 +11,52 @@
   body {
     margin: 0;
     padding: 0;
-    background: #8334eb;
+    background: #232227;
     font-family: 'Roboto', sans-serif;
   }
   .wrapper {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    width: 100vw;
+    position: absolute;
+    z-index: 5;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .dot-wrapper {
+    height: 90vh;
+    width: 90vw;
+    max-width: 1350px;
+    margin-top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 1;
+  }
+  .dot {
+    height: 15px;
+    width: 15px;
+    margin: 5px;
+    border-radius: 50%;
+    background: #3f3f41;
+    box-shadow: 3px 3px 2px rgba(0, 0, 0, 0.5);
+    display: inline-block;
   }
   h1 {
     margin: 0;
     padding: 0;
     font-size: 250px;
     white-space: nowrap;
-    color: #261564;
+    color: #7a0505;
+    text-align: center;
     font-weight: 700;
-    text-shadow: 10px -10px 0px rgba(0, 0, 0, 0.8), 8px -8px 0px rgba(0, 0, 0, 0.7), 6px -6px 0px rgba(0, 0, 0, 0.6),
-      4px -4px 0px rgba(0, 0, 0, 0.5);
+    text-shadow: 10px -10px 0px rgba(172, 11, 12, 0.9), 9px -9px 0px rgba(172, 11, 12, 0.9),
+      8px -8px 0px rgba(172, 11, 12, 0.8), 7px -7px 0px rgba(172, 11, 12, 0.8), 6px -6px 0px rgba(172, 11, 12, 0.7),
+      5px -5px 0px rgba(172, 11, 12, 0.7), 4px -4px 0px rgba(172, 11, 12, 0.6), 3px -3px 0px rgba(172, 11, 12, 0.6),
+      2px -2px 0px rgba(172, 11, 12, 0.5), 1px 1px 0px rgba(172, 11, 12, 0.5);
   }
   p {
     text-align: center;
     margin: 0;
+    color: #807f81;
     font-size: 46px;
   }
 </style>

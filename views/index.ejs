@@ -2,11 +2,30 @@
 <html>
   <head>
     <%- include ('partials/header') %>
+    <script>
+      window.onload = function() {
+        var infected = '<%= infected %>'
+        var dots = 0
+        var dotGenerator = setInterval(function() {
+          var node = document.createElement('div')
+          node.setAttribute('class', 'dot')
+          document.getElementById('dot-wrapper').appendChild(node)
+          dots++
+          if (dots >= infected) {
+            stopGenerator('dot')
+          }
+        }, 5)
+        function stopGenerator() {
+          clearInterval(dotGenerator)
+        }
+      }
+    </script>
   </head>
   <body>
     <div class="wrapper">
       <h1 id="infected"><%= infected %></h1>
       <p>Currently infected in finland</p>
     </div>
+    <div class="dot-wrapper" id="dot-wrapper"></div>
   </body>
 </html>
