@@ -8,6 +8,7 @@ External libraries used:
  - pdfkit for PDF creation
  - moment for date formatting
  - cheerio to extract data from retrieved html file
+ - ejs as template engine
 
 ## API Calls: 
 ### GET /infections
