@@ -5,14 +5,18 @@ const moment = require('moment')
 const PDFDocument = require('pdfkit')
 
 const fetchInfections = async () => {
-  const regex = /yhteensä\s(\d*)\slaboratoriovarmistettua/i
-  const htmlContent = await fetch(
-    'https://thl.fi/fi/web/infektiotaudit-ja-rokotukset/ajankohtaista/ajankohtaista-koronaviruksesta-covid-19/tilannekatsaus-koronaviruksesta'
-  )
-
-  return $('[data-analytics-asset-id="5700416"]', await htmlContent.text())
-    .text()
-    .match(regex)[1]
+  try {
+    const regex = /yhteensä\s([\d\s]*)\slaboratoriovarmistettua/i
+    const htmlContent = await fetch(
+      'https://thl.fi/fi/web/infektiotaudit-ja-rokotukset/ajankohtaista/ajankohtaista-koronaviruksesta-covid-19/tilannekatsaus-koronaviruksesta'
+    )
+    const data = $('[data-analytics-asset-id="5700416"]', await htmlContent.text())
+      .text()
+      .match(regex)[1]
+    return data ? data : '-'
+  } catch (e) {
+    console.log('Unable to retrieve amount of infected people', e)
+  }
 }
 
 const app = express()
@@ -30,6 +34,7 @@ app.get('/api', (req, res) => {
 })
 
 app.get('/api/infections', async (req, res) => {
+  console.log(await fetchInfections())
   res.json({
     infected: await fetchInfections()
   })
